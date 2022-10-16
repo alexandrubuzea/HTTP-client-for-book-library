@@ -1,0 +1,49 @@
+### Third Homework at the Communication Protocols Course
+## Copyright 2022 Buzea Alexandru-Mihai-Iulian 321CAb
+## E-mail: alexandru.buzea2007@stud.acs.upb.ro
+
+0. Introduction
+The main task of this homework was to write a HTTP client in order to communicate
+with a HTTP server which stores informations about books.
+
+1. The main logic
+- The client logic and API were implemented in client.c file.
+- I created an enum data type in order to determine the type of command
+- I also kept a buffer for the message and two pointers (initial they are
+equal to NULL, but they will have the values of the cookie and token
+respectively).
+- At each step in the *while* loop, I open a new TCP connection (HTTP application
+protocol works only over TCP transport protocol), because it is desired that
+HTTP connection is to be stateless (the result of the current request must not
+depend on the previous requests).
+
+2. Utils functions
+- I created the utils.c file (which basically represents the solution of the
+whole homework). Here I implemented a function for each of the following
+commands: register, login, enter_library, get_book, get_books, add_book, delete_book,
+logout and exit. Each command uses one of the three main types of HTTP connections
+(requests): GET, POST and DELETE request. The header of the HTTP request was built
+using functions from requests.c (written during laboratory 10).
+- Most of the commands also have a data body, given as a Javascript Object Notation
+object. In order to build such objects in the context of procedural programming (C),
+I used a JSON library recommended by the team of this homework (parson) -> more
+details in the third section.
+- While I received responses from the server, I parsed them as strings and printed
+a suitable response (I enjoyed very much using strtok() and strchr() functions,
+because this was the only way to extract the token/cookie in the C language).
+
+3. JSON library
+- Because my whole homework was written in C, I chose to use parson library.
+- The main reasons why I chose to use this library was that, at the time I 
+realized I need to parse JSON objects, I had no support for object-oriented
+programming (my whole project was procedural - so it was not a good time to
+switch to C++ and use nlohmann instead). Another very important reason was that
+parson has a very intuitive API that allowed me to perform complex operations
+such as creating JSON objects or parse JSON objects from strings with only a
+few lines of code.
+- In addition, the parson library is open-source and it is written in a very
+concise, clear manner (technically a bug-free implementation).
+
+4. Feedback
+- It was a nice homework to work at, I'm just sorry that I did not have much time
+to work at it, but it clearly can be developed in the future. Thank you !
